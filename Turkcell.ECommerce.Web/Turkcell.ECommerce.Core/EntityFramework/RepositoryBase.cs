@@ -5,7 +5,6 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
-using Turkcell.ECommerce.Core.Dal;
 using Turkcell.ECommerce.Core.DataAccess;
 using Turkcell.ECommerce.Core.Entities;
 
@@ -43,6 +42,11 @@ namespace Turkcell.ECommerce.Core.EntityFramework
             }
 
             return await query.ToListAsync();
+        }
+
+        public async Task SaveAsync()
+        {
+            await _context.SaveChangesAsync();
         }
     }
 }

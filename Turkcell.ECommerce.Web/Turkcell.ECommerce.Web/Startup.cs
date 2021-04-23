@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Turkcell.ECommerce.Business.Concrete.Extensions;
 using Turkcell.ECommerce.DataAccess;
 
 namespace Turkcell.ECommerce.Web
@@ -32,7 +33,7 @@ namespace Turkcell.ECommerce.Web
 
             services.AddDbContext<EnityFramWorkDbContext>(options =>
                     options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
-
+            services.LoadMyService();
 
         }
 
@@ -42,6 +43,8 @@ namespace Turkcell.ECommerce.Web
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                //404 error versin eğer sayfa yoksa
+                app.UseStatusCodePages();
             }
             else
             {

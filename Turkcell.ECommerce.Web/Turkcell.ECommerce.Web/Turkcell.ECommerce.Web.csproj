@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Turkcell.ECommerce.DataAccess\Turkcell.ECommerce.DataAccess.csproj" />
+    <ProjectReference Include="..\Turkcell.ECommerce.Business\Turkcell.ECommerce.Business.csproj" />
     <ProjectReference Include="..\Turkcell.ECommerce.Entities\Turkcell.ECommerce.Entities.csproj" />
   </ItemGroup>
 

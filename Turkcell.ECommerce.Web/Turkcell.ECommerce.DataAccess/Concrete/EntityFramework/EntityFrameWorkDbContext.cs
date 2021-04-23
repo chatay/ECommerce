@@ -24,6 +24,7 @@ namespace Turkcell.ECommerce.DataAccess
             modelBuilder.Entity<Product>(entity =>
             {
                 entity.HasKey(e => e.Id);
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
                 entity.Property(e => e.InsertedDateTime).HasDefaultValueSql("CURRENT_TIMESTAMP");
                 entity.Property(e => e.UpdatedDateTime).HasDefaultValueSql("CURRENT_TIMESTAMP");
                 entity.Property(e => e.UserId).HasDefaultValueSql("1");
