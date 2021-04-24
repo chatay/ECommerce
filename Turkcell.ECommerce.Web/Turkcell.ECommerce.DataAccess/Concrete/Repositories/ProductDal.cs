@@ -8,9 +8,9 @@ using Turkcell.ECommerce.DataAccess.Dto;
 
 namespace Turkcell.ECommerce.DataAccess.Concrete
 {
-    public class ProductDal: RepositoryBase<Product>, IProductDal
+    public class ProductDal : RepositoryBase<Product, EnityFramWorkDbContext>, IProductDal
     {
-        public ProductDal(DbContext context): base(context)
+        public ProductDal(EnityFramWorkDbContext context): base(context)
         {
 
         }

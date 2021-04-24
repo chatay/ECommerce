@@ -10,8 +10,9 @@ using Turkcell.ECommerce.Core.Entities;
 
 namespace Turkcell.ECommerce.Core.EntityFramework
 {
-    public class RepositoryBase<Tentity> : IRepository<Tentity>
+    public class RepositoryBase<Tentity, TContext> : IRepository<Tentity>
         where Tentity : class, IEntity, new()
+        where TContext: DbContext
     {
         private readonly DbContext _context;
         public RepositoryBase(DbContext _context)

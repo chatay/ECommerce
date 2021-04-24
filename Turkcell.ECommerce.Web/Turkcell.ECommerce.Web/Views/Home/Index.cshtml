@@ -1,47 +1,50 @@
-﻿@model IEnumerable<Turkcell.ECommerce.Web.Models.ProductModel>
+﻿@{
+    ViewBag.Title = "Home Page";
+}
 
-@{ ViewData["Title"] = "Products"; }
+<div class="row">
+    <div class="col-md-12">
+        <div class="page-header">
+            <h2>Ürünler</h2>
+        </div>
+    </div>
+</div>
 
-<h2>Products</h2>
-@if (Model != null)
-{<table class="table">
-        <thead>
-            <tr>
+<div class="row product-container">
 
-                <th>
-                    @Html.DisplayNameFor(model => model.Name)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Price)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Photo)
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-<tr>
+    <div class="col-md-3 col-sm-3 col-xs-6" style="margin-bottom:8px">
+        <div class="thumbnail product-item" style="height:300px">
 
-    <td>
-        @Html.DisplayFor(modelItem => item.Name)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Price)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Photo)
-    </td>
-    <td>
-        @Html.ActionLink("View", "ProductDetail", new { productId = item.Id })
-    </td>
-</tr>}
-        </tbody>
-    </table> }
-                else
-                {
+            <img class="img-responsive"
+                 style="cursor:pointer;height:160px;width:100%"
+                 src="../images/turkcell.jpg" />
 
-    <h4>No Product found</h4>}
+            <div class="caption">
+                <h5>Telefon</h5>
+                <p>1000 TL</p>
+                <p>Stokta</p>
+                <button class="product-item-badge">Sipariş Ver</button>
+            </div>
+
+
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-3 col-xs-6" style="margin-bottom:8px">
+        <div class="thumbnail product-item" style="height:300px">
+
+
+            <img class="img-responsive"
+                 style="cursor:pointer;height:160px;width:100%"
+                 src="~/images/kulaklik.png" />
+            <div class="caption">
+                <h5>Kulaklık</h5>
+                <p>1000 TL</p>
+                <p>Stokta</p>
+                <button onclick="@Html.ActionLink("Home", "Privacy", "Home")" class="product-item-badge">Sipariş Ver</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
 

@@ -7,7 +7,7 @@ using Turkcell.ECommerce.DataAccess.Dto;
 
 namespace Turkcell.ECommerce.DataAccess
 {
-    public partial class EnityFramWorkDbContext : DbContext
+    public class EnityFramWorkDbContext : DbContext
     {
         public DbSet<Product> Account { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
