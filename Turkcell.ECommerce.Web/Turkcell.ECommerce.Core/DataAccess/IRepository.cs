@@ -14,5 +14,8 @@ namespace Turkcell.ECommerce.Core.DataAccess
         Task<IList<T>> GetAllAsync(Expression<Func<T, bool>> filter = null);
         Task AddAsync(T entity);
         Task SaveAsync();
+        Task<IEnumerable<T>> GetAllBasketItemsAsync(Expression<Func<T, bool>> filter = null);
+        TEntity GetById<TEntity>(object id)
+           where TEntity : class;
     }
 }

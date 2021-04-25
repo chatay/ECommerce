@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Turkcell.ECommerce.Core.Shared.Utilities.Results.Abstract;
+using Turkcell.ECommerce.Core.Shared.Utilities.Results.ComplexTypes;
 
 namespace Turkcell.ECommerce.Core.Shared.Utilities.Results.Concrete
 {
@@ -17,12 +19,13 @@ namespace Turkcell.ECommerce.Core.Shared.Utilities.Results.Concrete
         }
         public Result(ResultStatus resultStatus, string message, Exception exception)
         {
+            ResultStatus = resultStatus;
+            Message = message;
             Exception = exception;
         }
         public ResultStatus ResultStatus { get; }
-
         public string Message { get; }
-
         public Exception Exception { get; }
+        // new Result(ResultStatus.Error,exception.message,exception)
     }
 }

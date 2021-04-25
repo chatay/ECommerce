@@ -13,6 +13,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Turkcell.ECommerce.Business.Concrete.Extensions;
 using Turkcell.ECommerce.DataAccess;
+using Turkcell.ECommerce.Entities.Concrete;
 
 namespace Turkcell.ECommerce.Web
 {
@@ -43,6 +44,7 @@ namespace Turkcell.ECommerce.Web
                 app.UseDeveloperExceptionPage();
                 //404 error versin eğer sayfa yoksa
                 app.UseStatusCodePages();
+                AddTestData();
             }
             else
             {
@@ -56,18 +58,24 @@ namespace Turkcell.ECommerce.Web
             app.UseRouting();
 
             app.UseAuthorization();
-            app.UseStaticFiles(new StaticFileOptions
-            {
-                FileProvider = new PhysicalFileProvider(
-                Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot/images")),
-                RequestPath = "/wwwroot/images"
-            });
+            app.UseStaticFiles();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+        }
+        private static void AddTestData()
+        {
+            IList<Product> products = new List<Product>();
+            products.Add(new Product { Name = "Turkcell Telefon", Price = 10.00M, Photo = "", Desciption = "Turkcell Telefon" });
+            products.Add(new Product { Name = "Turkcell Bilgisayar", Price = 12.00M, Photo = "", Desciption = "Turkcell Bilgisayar" });
+            products.Add(new Product { Name = "Turkcell Kulaklık", Price = 13.00M, Photo = "", Desciption = "Turkcell Kulaklık" });
+
+            IList<BasketItem> basketItems = new List<BasketItem>();
+            basketItems.Add(new BasketItem { Id = 1, ProductId = 1, Quantity = 2, UserId = 1 });
+            basketItems.Add(new BasketItem { Id = 2, ProductId = 5, Quantity = 1, UserId = 1 });
         }
     }
 }

@@ -1,0 +1,48 @@
+﻿@model IList<Turkcell.ECommerce.Entities.Concrete.BasketItem>
+
+@{ ViewData["Title"] = "Basket"; }
+
+<h2>Basket</h2>
+
+@if (Model.Any())
+{
+<table class="table">
+    <thead>
+            <tr>
+                <th>
+                   Ürün İsmi
+                </th>
+                <th>
+                   Fiyat
+                </th>
+                <th>
+                   Miktar
+                   Miktar
+                </th>
+            </tr>
+        }
+
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Product.Name)
+    </td>
+    <td>@Html.DisplayFor(modelItem => item.Product.Price)</td>
+    <td>
+        @Html.DropDownListFor(modelItem => item.Quantity, Enumerable.Range(1, 10).Select(i => new SelectListItem { Text = i.ToString(), Value = i.ToString() }))
+    </td>
+</tr>}
+    </tbody>
+</table>
+
+   }
+else
+{
+    <div>Your basket is empty</div>
+}
+<br />
+<a href="../Home/Index">Back to Products</a>
+

@@ -3,13 +3,14 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
-using Turkcell.ECommerce.DataAccess.Dto;
+using Turkcell.ECommerce.Entities.Concrete;
 
 namespace Turkcell.ECommerce.DataAccess
 {
     public class EnityFramWorkDbContext : DbContext
     {
-        public DbSet<Product> Account { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<BasketItem> BasketItems { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlite("Filename=TestDatabase.db", options =>
@@ -20,7 +21,6 @@ namespace Turkcell.ECommerce.DataAccess
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Product>().ToTable("Account", "test");
             modelBuilder.Entity<Product>(entity =>
             {
                 entity.HasKey(e => e.Id);

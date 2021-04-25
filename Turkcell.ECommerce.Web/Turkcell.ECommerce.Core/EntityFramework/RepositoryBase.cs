@@ -12,7 +12,7 @@ namespace Turkcell.ECommerce.Core.EntityFramework
 {
     public class RepositoryBase<Tentity, TContext> : IRepository<Tentity>
         where Tentity : class, IEntity, new()
-        where TContext: DbContext
+        where TContext : DbContext
     {
         private readonly DbContext _context;
         public RepositoryBase(DbContext _context)
@@ -21,7 +21,8 @@ namespace Turkcell.ECommerce.Core.EntityFramework
         }
         public async Task AddAsync(Tentity entity)
         {
-           await _context.Set<Tentity>().AddAsync(entity);
+            await _context.Set<Tentity>().AddAsync(entity);
+            await SaveAsync();
         }
         public async Task<Tentity> GetAsync(Expression<Func<Tentity, bool>> filter)
         {
@@ -44,10 +45,25 @@ namespace Turkcell.ECommerce.Core.EntityFramework
 
             return await query.ToListAsync();
         }
+        public async Task<IEnumerable<Tentity>> GetAllBasketItemsAsync(Expression<Func<Tentity, bool>> filter = null)
+        {
+            IQueryable<Tentity> query = _context.Set<Tentity>();
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+
+            return await query.ToListAsync();
+        }
 
         public async Task SaveAsync()
         {
             await _context.SaveChangesAsync();
+        }
+
+        public TEntity GetById<TEntity>(object id) where TEntity : class
+        {
+            return _context.Set<TEntity>().Find(id);
         }
     }
 }

@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Turkcell.ECommerce.Core.Shared.Utilities.Results
+namespace Turkcell.ECommerce.Core.Shared.Utilities.Results.ComplexTypes
 {
     public enum ResultStatus
     {
-        Success =0,
+        Success=0,
         Error=1,
-        Warning=2,
-        Info=3
+        Warning = 2, // ResultStatus.Warning
+        Info = 3 // ResultStatus.Info
     }
 }

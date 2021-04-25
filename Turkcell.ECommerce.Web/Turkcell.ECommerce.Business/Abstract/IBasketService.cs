@@ -8,9 +8,9 @@ using Turkcell.ECommerce.Entities.Dtos;
 
 namespace Turkcell.ECommerce.Business.Abstract
 {
-    public interface IProductService
+    public interface IBasketService
     {
-        Task<IDataResult<ProductDto>> Get(int productId);
-        Task<IDataResult<IList<Product>>> GetAll();
+        Task<IResult> Add(BasketAddDto basketAddDto);
+        Task<IList<BasketItem>> GetBasketItems();
     }
 }

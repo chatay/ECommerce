@@ -1,0 +1,66 @@
+﻿@model Turkcell.ECommerce.Core.Shared.Utilities.Results.Abstract.IDataResult<Turkcell.ECommerce.Entities.Dtos.ProductDto>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap/dist/css/bootstrap-grid.min.css" rel="stylesheet" />
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    @{ ViewData["Title"] = "Product Detail"; }
+
+    <h2>Ürün Detayı</h2>
+    @if (Model != null)
+    {
+<table with="65%">
+    <tr>
+        <td>
+            <section class="landing">
+                <div class="container">
+                    <hr />
+                    <dl class="row">
+                        <dt class="col-sm-3">
+                            @Html.DisplayNameFor(modelItem => modelItem.Data.Product.Name)
+                        </dt>
+                        <dd class="col-sm-9">
+                            @Html.DisplayFor(modelItem => modelItem.Data.Product.Name)
+                        </dd>
+                        <dt class="col-sm-3">
+                            @Html.DisplayNameFor(modelItem => modelItem.Data.Product.Price)
+                        </dt>
+                        <dd class="col-sm-9">
+                            @Html.DisplayFor(modelItem => modelItem.Data.Product.Price)
+                        </dd>
+                        <dt class="col-sm-3">
+                            @Html.DisplayNameFor(modelItem => modelItem.Data.Product.Desciption)
+                        </dt>
+                        <dd class="col-sm-9">
+                            @Html.DisplayFor(modelItem => modelItem.Data.Product.Desciption)
+                        </dd>
+                        <dt></dt>
+
+                        <dd>
+                            <div>
+                                @using (Html.BeginForm("AddItemIntoBasket", "Basket", FormMethod.Post))
+                                {
+                                    @Html.HiddenFor(m => m.Data.Product.Id)
+                                    @Html.Hidden("ProductId", Model.Data.Product.Id)
+
+                                    @Html.DropDownList("Quantity", Enumerable.Range(1, 10).Select(i => new SelectListItem { Text = i.ToString(), Value = i.ToString() }))
+                                    @Html.Hidden("UserId", 1)
+                                   <input type="submit" class="btn-primary" value="Add Basket" />}
+                            </div>
+                        </dd>
+                    </dl>
+                </div>
+            </section>
+        </td>
+        <td>
+        </td>
+    </tr>
+</table> }
+else
+{
+<div>
+    No product found
+</div>}
+
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>

@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using Turkcell.ECommerce.Business.Abstract;
-using Turkcell.ECommerce.Core.Shared.Utilities.Results;
 using Turkcell.ECommerce.Core.Shared.Utilities.Results.Abstract;
+using Turkcell.ECommerce.Core.Shared.Utilities.Results.ComplexTypes;
 using Turkcell.ECommerce.Core.Shared.Utilities.Results.Concrete;
 using Turkcell.ECommerce.DataAccess.Abstract;
-using Turkcell.ECommerce.DataAccess.Dto;
+using Turkcell.ECommerce.Entities.Concrete;
 using Turkcell.ECommerce.Entities.Dtos;
 
 namespace Turkcell.ECommerce.Business.Concrete
@@ -20,20 +20,18 @@ namespace Turkcell.ECommerce.Business.Concrete
         {
             this.productDal = productDal;
         }
-
-        public async Task<IResult> Add(ProductAddDto producAddDto)
+        public async Task<IDataResult<ProductDto>> Get(int productId)
         {
-            await productDal.AddAsync(new Product
+            var product = await productDal.GetAsync(c => c.Id == productId);
+            if (product != null)
             {
-                Id = Guid.NewGuid(),
-                Name = producAddDto.Name,
-                Price = producAddDto.Price,
-                InsertedDateTime = DateTime.Now,
-                UpdatedDateTime = DateTime.Now,
-                UserId = 1
-            }).ContinueWith(t => productDal.SaveAsync());
-            await productDal.SaveAsync();
-            return new Result(ResultStatus.Success, $"{producAddDto.Name} sipariş verildi");
+                return new DataResult<ProductDto>(ResultStatus.Success, new ProductDto
+                {
+                    Product = product,
+                    ResultStatus = ResultStatus.Success
+                });
+            }
+            return new DataResult<ProductDto>(ResultStatus.Error, "Böyle bir ürün bulunamadı.", null);
         }
 
         public async Task<IDataResult<IList<Product>>> GetAll()

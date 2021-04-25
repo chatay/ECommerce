@@ -18,9 +18,9 @@ namespace Turkcell.ECommerce.DataAccess.Migrations
 
             modelBuilder.Entity("Turkcell.ECommerce.DataAccess.Dto.Product", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("CategoryId")
                         .HasColumnType("INTEGER");
@@ -54,7 +54,38 @@ namespace Turkcell.ECommerce.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Account","test");
+                    b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("Turkcell.ECommerce.Entities.Concrete.BasketItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("BasketItems");
+                });
+
+            modelBuilder.Entity("Turkcell.ECommerce.Entities.Concrete.BasketItem", b =>
+                {
+                    b.HasOne("Turkcell.ECommerce.DataAccess.Dto.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

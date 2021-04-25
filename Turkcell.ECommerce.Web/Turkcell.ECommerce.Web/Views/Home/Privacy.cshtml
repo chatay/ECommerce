@@ -1,6 +1,43 @@
-﻿@{
-    ViewData["Title"] = "Privacy Policy";
-}
-<h1>@ViewData["Title"]</h1>
+﻿@model Turkcell.ECommerce.Entities.Dtos.ProductDto
 
-<p>Use this page to detail your site's privacy policy.</p>
+@{ ViewData["Title"] = "Products"; }
+
+<h2>Products</h2>
+@if (Model != null)
+{<table class="table">
+        <thead>
+                <tr>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.Product.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Product.Price)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Product.Desciption)
+                    </th>
+                    <th></th>
+                </tr>
+        </thead>
+        <tbody>
+                <tr>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => modelItem.Product.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => modelItem.Product.Price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => modelItem.Product.Desciption)
+                    </td>
+                </tr>
+        </tbody>
+    </table> }
+else
+{
+
+    <h4>No Product found</h4>
+}
+

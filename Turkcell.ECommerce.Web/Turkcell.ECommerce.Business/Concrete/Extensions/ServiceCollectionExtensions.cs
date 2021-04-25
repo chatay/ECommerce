@@ -7,6 +7,7 @@ using Turkcell.ECommerce.Core.DataAccess;
 using Turkcell.ECommerce.DataAccess;
 using Turkcell.ECommerce.DataAccess.Abstract;
 using Turkcell.ECommerce.DataAccess.Concrete;
+using Turkcell.ECommerce.DataAccess.Concrete.Repositories;
 
 namespace Turkcell.ECommerce.Business.Concrete.Extensions
 {
@@ -17,6 +18,8 @@ namespace Turkcell.ECommerce.Business.Concrete.Extensions
             serviceCollection.AddDbContext<EnityFramWorkDbContext>();
             serviceCollection.AddScoped<IProductService, ProductManager>();
             serviceCollection.AddScoped<IProductDal, ProductDal>();
+            serviceCollection.AddScoped<IBasketService, BasketManager>();
+            serviceCollection.AddScoped<IBasketDal, BasketDal>();
 
             return serviceCollection;
         }

@@ -1,13 +1,14 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using Turkcell.ECommerce.Core.Entities;
 
-namespace Turkcell.ECommerce.DataAccess.Dto
+namespace Turkcell.ECommerce.Entities.Concrete
 {
-    public class Product: IEntity
+    public class Product: IEntity, IEnumerable
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Desciption { get; set; }
         public int CategoryId { get; set; }
@@ -16,5 +17,10 @@ namespace Turkcell.ECommerce.DataAccess.Dto
         public DateTime InsertedDateTime { get; set; }
         public DateTime UpdatedDateTime { get; set; }
         public int UserId { get; set; }
+
+        public IEnumerator GetEnumerator()
+        {
+            return this.GetEnumerator();
+        }
     }
 }

@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Turkcell.ECommerce.DataAccess.Dto;
+using Turkcell.ECommerce.Entities.Concrete;
 
 namespace Turkcell.ECommerce.Entities.Dtos
 {
-    public class ProductGetDto
+    public class ProductDto: DtoGetBase
     {
-        public IList<Product> product { get; set; }
+        public Product Product { get; set; }
     }
 }
