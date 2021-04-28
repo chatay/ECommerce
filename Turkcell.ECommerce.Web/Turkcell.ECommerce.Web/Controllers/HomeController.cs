@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using log4net;
+using log4net.Core;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -15,28 +17,27 @@ namespace Turkcell.ECommerce.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
         private readonly IProductService _productService;
-
-        public HomeController(ILogger<HomeController> logger, IProductService _productService)
+        private static readonly ILog log = LogManager.GetLogger(typeof(HomeController));
+        //private readonly ILogger _logger;
+        private readonly ILogger<HomeController> _logger;
+        public HomeController(IProductService _productService, ILogger<HomeController> logger)
         {
-            _logger = logger;
             this._productService = _productService;
+            _logger = logger;
         }
 
         public async Task<IActionResult> Index()
         {
+            _logger.LogInformation("Home Controller Index");
+            //_logger.Log();
+            log.Debug("selam");
             var productViewModel = await _productService.GetAll();
             return View(productViewModel);
         }
-        [HttpPost]
-        public IActionResult AddProduct(string data)
-        {
-            //var result = await _productService.Add();
-            return View();
-        }
         public async Task<IActionResult> GetOrders()
         {
+            _logger.LogInformation("GetOrders");
             var result = await _productService.GetAll();
             if (result.ResultStatus == ResultStatus.Success)
             {
@@ -47,6 +48,7 @@ namespace Turkcell.ECommerce.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> ProductDetail(int productId)
         {
+            _logger.LogInformation("ProductDetail");
             var productViewModel = await _productService.Get(productId);
             return View("ProductDetail",productViewModel);
         }
