@@ -29,11 +29,28 @@ namespace Turkcell.ECommerce.Web.Controllers
 
         public async Task<IActionResult> Index()
         {
-            _logger.LogInformation("Home Controller Index");
-            //_logger.Log();
-            log.Debug("selam");
-            var productViewModel = await _productService.GetAll();
-            return View(productViewModel);
+            _logger.LogInformation("Home Controller started");
+            try
+            {
+                var productViewModel = await _productService.GetAll();
+
+                _logger.LogInformation("Home Controller started");
+
+                return View(productViewModel);
+            }
+
+            catch (Exception ex)
+            {
+                _logger.LogError("Home Controller exception ", ex);
+
+                return View("Error");
+            }
+            finally
+            {
+                // StreamReader.Close() ya da db connection kapatmak için kullanabiliriz.
+                // dispose işlemler için ...
+            }
+
         }
         public async Task<IActionResult> GetOrders()
         {

@@ -11,6 +11,7 @@ namespace Turkcell.ECommerce.DataAccess
     {
         public DbSet<Product> Products { get; set; }
         public DbSet<BasketItem> BasketItems { get; set; }
+        public DbSet<ContactUs> ContactUs { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlite("Filename=TestDatabase.db", options =>

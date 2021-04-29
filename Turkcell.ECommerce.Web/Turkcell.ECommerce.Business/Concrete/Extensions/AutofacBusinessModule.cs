@@ -26,8 +26,9 @@ namespace Turkcell.ECommerce.Business.Concrete.Extensions
             builder.RegisterType<BasketManager>().As<IBasketService>();
             builder.RegisterType<BasketDal>().As<IBasketDal>();
 
-            //log4net.Config.XmlConfigurator.Configure();
-            /// ...
+            builder.RegisterType<ContactUsManager>().As<IContactUsService>();
+            builder.RegisterType<ContactUsDal>().As<IContactUsDal>();
+
             ContainerBuilder cb = new ContainerBuilder();
             cb.Register(c => LogManager.GetLogger(typeof(Object))).As<ILog>();
             IContainer container = cb.Build();

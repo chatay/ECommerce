@@ -32,25 +32,6 @@ namespace Turkcell.ECommerce.Web
         public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
             Configuration = configuration;
-
-            //var builder = new ConfigurationBuilder()
-            //     .SetBasePath(Directory.GetCurrentDirectory())
-            //     .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-            //     .AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}.json", reloadOnChange: true, optional: true)
-            //     .AddEnvironmentVariables();
-
-            //Configuration = builder.Build();
-
-            //var elasticUri = Configuration["ElasticConfiguration:Uri"];
-
-            //Log.Logger = new LoggerConfiguration()
-            //   .Enrich.FromLogContext()
-            //   .WriteTo.Elasticsearch(new ElasticsearchSinkOptions(new Uri(elasticUri))
-            //   {
-            //       AutoRegisterTemplate = true,
-            //   })
-            //.CreateLogger();
-
         }
 
         public IConfiguration Configuration { get; }
@@ -62,13 +43,6 @@ namespace Turkcell.ECommerce.Web
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddAutoMapper(typeof(Startup));
             services.AddEntityFrameworkSqlite().AddDbContext<EnityFramWorkDbContext>();
-            //services.LoadMyService();
-
-            //services.AddDependencyResolvers(new ICoreModule[]
-            // {
-            //    new CoreModule(),
-            // });
-
             var container = new ContainerBuilder();
             container.Populate(services);
 
