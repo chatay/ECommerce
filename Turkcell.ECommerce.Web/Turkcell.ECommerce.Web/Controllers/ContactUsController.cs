@@ -1,11 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using RabbitMQ.Client;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using Turkcell.ECommerce.Business.Abstract;
 using Turkcell.ECommerce.Entities.Concrete;
 using Turkcell.ECommerce.Entities.Dtos;
+using Turkcell.ECommerce.MessageContracts;
 
 namespace Turkcell.ECommerce.Web.Controllers
 {
@@ -36,25 +39,39 @@ namespace Turkcell.ECommerce.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult CreateMessage(ContactUsDto model)
+        public async Task<IActionResult> CreateMessageAsync(ContactUsDto model)
         {
-            bool err = true;
-            if (ModelState.IsValid)
+            var bus = BusConfigurator.ConfigureBus();
+
+            var sendToUri = new Uri($"{RabbitMqConsts.RabbitMqUri}/{RabbitMqConsts.RegisterDemandServiceQueue}");
+            var endPoint = await bus.GetSendEndpoint(sendToUri);
+
+            await endPoint.Send<IRegisterMessageCommand>(new
             {
-                var messageEntity = new ContactUs
-                {
-                    Name = model.Name,
-                    Email = model.Email,
-                    Title = model.Title,
-                    Message = model.Message
-                };
+                Name = model.Name,
+                Email = model.Email,
+                Title = model.Title,
+                Message = model.Message
+            });
+            return Ok("Thanks");
 
-                _contactUsService.InsertMessage(messageEntity);
-                err = false;
-            }
+            //bool err = true;
+            //if (ModelState.IsValid)
+            //{
+            //    var messageEntity = new ContactUs
+            //    {
+            //        Name = model.Name,
+            //        Email = model.Email,
+            //        Title = model.Title,
+            //        Message = model.Message
+            //    };
 
-            TempData["ContactUsErr"] = err;
-            return RedirectToAction("Index");
+            //    _contactUsService.InsertMessage(messageEntity);
+            //    err = false;
+            //}
+
+            //TempData["ContactUsErr"] = err;
+            //return RedirectToAction("Index");
         }
 
         #endregion

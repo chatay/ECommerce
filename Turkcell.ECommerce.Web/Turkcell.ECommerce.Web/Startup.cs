@@ -24,6 +24,9 @@ using Turkcell.ECommerce.Entities.Concrete;
 using Microsoft.Extensions.Logging;
 using System.Reflection;
 using Microsoft.Extensions.Hosting.Internal;
+using Turkcell.ECommerce.MessageContracts;
+using MassTransit;
+using GreenPipes;
 
 namespace Turkcell.ECommerce.Web
 {
@@ -32,6 +35,8 @@ namespace Turkcell.ECommerce.Web
         public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
             Configuration = configuration;
+
+          
         }
 
         public IConfiguration Configuration { get; }
